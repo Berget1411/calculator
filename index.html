@@ -11,14 +11,14 @@
     />
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <main>
       <div id="calculator">
         <div id="display">
-          <p id="last-display">5 x 5 =</p>
-          <p id="current-display">25</p>
+          <p id="last-display"></p>
+          <p id="current-display"></p>
         </div>
         <div id="buttons">
           <div id="clear-delete">
@@ -26,22 +26,22 @@
             <button id="delete">DELETE</button>
           </div>
           <div id="num-operate">
-            <button class="nums">7</button>
-            <button class="nums">8</button>
-            <button class="nums">9</button>
-            <button id="divide">÷</button>
-            <button class="nums">4</button>
-            <button class="nums">5</button>
-            <button class="nums">6</button>
-            <button id="multiply">x</button>
-            <button class="nums">1</button>
-            <button class="nums">2</button>
-            <button class="nums">3</button>
-            <button id="subtract">-</button>
+            <button class="numbers">7</button>
+            <button class="numbers">8</button>
+            <button class="numbers">9</button>
+            <button class="operands" id="divide">÷</button>
+            <button class="numbers">4</button>
+            <button class="numbers">5</button>
+            <button class="numbers">6</button>
+            <button class="operands" id="multiply">x</button>
+            <button class="numbers">1</button>
+            <button class="numbers">2</button>
+            <button class="numbers">3</button>
+            <button class="operands" id="subtract">-</button>
             <button>.</button>
-            <button class="nums">0</button>
-            <button id="equal">=</button>
-            <button id="add">+</button>
+            <button class="numbers">0</button>
+            <button class="operands" id="equal">=</button>
+            <button class="operands" id="add">+</button>
           </div>
         </div>
       </div>
