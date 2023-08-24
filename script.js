@@ -63,14 +63,29 @@ const pressedNumber = (e) => {
 numbers.forEach((number) => number.addEventListener("click", pressedNumber));
 
 const pressedOperand = (e) => {
-  operator = e.target.id;
+  if (operator) {
+    equalPressed();
+    operator = e.target.id;
+  } else {
+    operator = e.target.id;
+  }
 };
 operands.forEach((operand) =>
   operand.addEventListener("click", pressedOperand)
 );
 
 const equalPressed = () => {
-  result = operate(operator, parseInt(n1), parseInt(n2));
-  updateDisplay(result);
+  if (!result) {
+    result = operate(operator, parseInt(n1), parseInt(n2));
+    updateDisplay(result);
+    n1 = undefined;
+    n2 = undefined;
+  } else {
+    let oldResult = result;
+    result = operate(operator, oldResult, parseInt(n2));
+    updateDisplay(result);
+    n1 = undefined;
+    n2 = undefined;
+  }
 };
 equalButton.addEventListener("click", equalPressed);
