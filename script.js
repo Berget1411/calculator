@@ -41,6 +41,13 @@ const updateDisplay = (text) => {
   display.textContent = text;
 };
 
+//Resets all values except result
+const resetValues = () => {
+  n1 = undefined;
+  n2 = undefined;
+  operator = undefined;
+};
+
 const pressedNumber = (e) => {
   if (!operator) {
     if (!n1) {
@@ -78,14 +85,32 @@ const equalPressed = () => {
   if (!result) {
     result = operate(operator, parseInt(n1), parseInt(n2));
     updateDisplay(result);
-    n1 = undefined;
-    n2 = undefined;
+    resetValues();
   } else {
     let oldResult = result;
     result = operate(operator, oldResult, parseInt(n2));
     updateDisplay(result);
-    n1 = undefined;
-    n2 = undefined;
+    resetValues();
   }
 };
 equalButton.addEventListener("click", equalPressed);
+
+const clear = () => {
+  display.textContent = "";
+  resetValues();
+  result = undefined;
+};
+clearButton.addEventListener("click", clear);
+
+const deletePressed = () => {
+  if (!n2) {
+    old = n1;
+    n1 = old.slice(0, -1);
+    updateDisplay(n1);
+  } else if (!n1) {
+    old = n2;
+    n2 = old.slice(0, -1);
+    updateDisplay(n2);
+  }
+};
+deleteButton.addEventListener("click", deletePressed);
