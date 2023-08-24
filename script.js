@@ -51,8 +51,10 @@ const resetValues = () => {
 };
 
 const roundResult = (result) => {
-  if (result.toString().length > 8) {
+  if (result.toString().length > 8 && result.toString().includes(".")) {
     return result.toFixed(6);
+  } else {
+    return result;
   }
 };
 
