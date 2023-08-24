@@ -41,6 +41,9 @@ let result;
 const updateDisplay = (text) => {
   display.textContent = text;
   dotButton.addEventListener("click", pressedDot);
+  operands.forEach((operand) =>
+    operand.addEventListener("click", pressedOperand)
+  );
 };
 
 //Resets all values except result
@@ -86,6 +89,9 @@ const pressedOperand = (e) => {
   } else {
     operator = e.target.id;
   }
+  operands.forEach((operand) =>
+    operand.removeEventListener("click", pressedOperand)
+  );
 };
 operands.forEach((operand) =>
   operand.addEventListener("click", pressedOperand)
