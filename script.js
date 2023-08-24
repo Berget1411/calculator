@@ -4,6 +4,7 @@ const deleteButton = document.querySelector("#delete");
 const numbers = document.querySelectorAll(".numbers");
 const operands = document.querySelectorAll(".operands");
 const equalButton = document.querySelector("#equal");
+const dotButton = document.querySelector("#dot");
 const add = (n1, n2) => {
   return n1 + n2;
 };
@@ -39,6 +40,7 @@ let result;
 
 const updateDisplay = (text) => {
   display.textContent = text;
+  dotButton.addEventListener("click", pressedDot);
 };
 
 //Resets all values except result
@@ -46,6 +48,12 @@ const resetValues = () => {
   n1 = undefined;
   n2 = undefined;
   operator = undefined;
+};
+
+const roundResult = (result) => {
+  if (result.toString().length > 8) {
+    return result.toFixed(6);
+  }
 };
 
 const pressedNumber = (e) => {
@@ -83,12 +91,14 @@ operands.forEach((operand) =>
 
 const equalPressed = () => {
   if (!result) {
-    result = operate(operator, parseInt(n1), parseInt(n2));
+    result = operate(operator, parseFloat(n1), parseFloat(n2));
+    result = roundResult(result);
     updateDisplay(result);
     resetValues();
   } else {
     let oldResult = result;
-    result = operate(operator, oldResult, parseInt(n2));
+    result = operate(operator, oldResult, parseFloat(n2));
+    result = roundResult(result);
     updateDisplay(result);
     resetValues();
   }
@@ -114,3 +124,21 @@ const deletePressed = () => {
   }
 };
 deleteButton.addEventListener("click", deletePressed);
+
+const pressedDot = () => {
+  if (display.textContent.includes(".")) {
+    dotButton.removeEventListener("click", pressedDot);
+  } else {
+    if (display.textContent == n1) {
+      n1 += ".";
+      display.textContent += ".";
+    } else if (display.textContent == n2) {
+      n2 += ".";
+      display.textContent += ".";
+    } else {
+      n1 = "0.";
+      display.textContent = "0.";
+    }
+  }
+};
+dotButton.addEventListener("click", pressedDot);
