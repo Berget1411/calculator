@@ -75,3 +75,16 @@ main {
   font-size: 1.2em;
   background-color: white;
 }
+
+footer img {
+  width: 25px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 10px;
+  font-size: 1.4em;
+}
