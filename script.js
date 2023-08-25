@@ -85,10 +85,8 @@ numbers.forEach((number) => number.addEventListener("click", pressedNumber));
 const pressedOperand = (e) => {
   if (operator) {
     equalPressed();
-    operator = e.target.id;
-  } else {
-    operator = e.target.id;
   }
+  operator = e.target.id;
   operands.forEach((operand) =>
     operand.removeEventListener("click", pressedOperand)
   );
@@ -121,14 +119,16 @@ const clear = () => {
 clearButton.addEventListener("click", clear);
 
 const deletePressed = () => {
-  if (!n2) {
-    old = n1;
-    n1 = old.slice(0, -1);
-    updateDisplay(n1);
-  } else if (!n1) {
-    old = n2;
-    n2 = old.slice(0, -1);
-    updateDisplay(n2);
+  if (display.textContent != result) {
+    if (!n2) {
+      old = n1;
+      n1 = old.slice(0, -1);
+      updateDisplay(n1);
+    } else if (!n1) {
+      old = n2;
+      n2 = old.slice(0, -1);
+      updateDisplay(n2);
+    }
   }
 };
 deleteButton.addEventListener("click", deletePressed);
@@ -150,3 +150,48 @@ const pressedDot = () => {
   }
 };
 dotButton.addEventListener("click", pressedDot);
+
+//keyboard support
+document.body.addEventListener("keydown", (e) => {
+  if (parseInt(e.key) || e.key == "0") {
+    if (!operator) {
+      if (!n1) {
+        n1 = e.key;
+        updateDisplay(n1);
+      } else if (n1) {
+        n1 += e.key;
+        updateDisplay(n1);
+      }
+    } else if (operator) {
+      if (!n2) {
+        n2 = e.key;
+        updateDisplay(n2);
+      } else if (n2) {
+        n2 += e.key;
+        updateDisplay(n2);
+      }
+    }
+  } else if (e.key == ".") {
+    pressedDot();
+  } else if (e.key == "Enter" || e.key == "=") {
+    equalPressed();
+  } else if (e.key == "Backspace") {
+    deletePressed();
+  } else {
+    if (operator) {
+      equalPressed();
+    }
+    if (e.key == "+") {
+      operator = "add";
+    } else if (e.key == "-") {
+      operator = "subtract";
+    } else if (e.key == "*") {
+      operator = "multiply";
+    } else if (e.key == "/") {
+      operator = "divide";
+    }
+    operands.forEach((operand) =>
+      operand.removeEventListener("click", pressedOperand)
+    );
+  }
+});
