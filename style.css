@@ -15,7 +15,7 @@ main {
   margin: 60px;
   display: flex;
   flex-direction: column;
-  background-color: gray;
+  background-color: #cccccc;
   padding: 20px;
   border: 2px solid black;
   border-radius: 10px;
@@ -73,4 +73,5 @@ main {
   border: 2px solid black;
   border-radius: 5px;
   font-size: 1.2em;
+  background-color: white;
 }
