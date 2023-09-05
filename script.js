@@ -5,32 +5,18 @@ const numbers = document.querySelectorAll(".numbers");
 const operands = document.querySelectorAll(".operands");
 const equalButton = document.querySelector("#equal");
 const dotButton = document.querySelector("#dot");
-const add = (n1, n2) => {
-  return n1 + n2;
-};
 
-const subtract = (n1, n2) => {
-  return n1 - n2;
-};
+const calculator = (() => {
+  const add = (n1, n2) => n1 + n2;
+  const subtract = (n1, n2) => n1 - n2;
+  const multiply = (n1, n2) => n1 * n2;
+  const divide = (n1, n2) => n1 / n2;
 
-const multiply = (n1, n2) => {
-  return n1 * n2;
-};
-
-const divide = (n1, n2) => {
-  return n1 / n2;
-};
+  return { add, subtract, multiply, divide };
+})();
 
 const operate = (operator, n1, n2) => {
-  if (operator === "add") {
-    return add(n1, n2);
-  } else if (operator === "subtract") {
-    return subtract(n1, n2);
-  } else if (operator === "multiply") {
-    return multiply(n1, n2);
-  } else if (operator === "divide") {
-    return divide(n1, n2);
-  }
+  return calculator[operator](n1, n2);
 };
 
 let n1;
